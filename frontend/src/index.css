@@ -4,7 +4,8 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: Outfit;
+  font-family: 'Outfit', Arial, sans-serif;
+  scroll-behavior:smooth;
  }
  body{
    min-height: 100vh;

@@ -1,9 +1,49 @@
-import React from 'react'
-import './placeorder.css'
-const placeorder = () => {
+import React, { useContext } from 'react';
+import './placeorder.css';
+import { StoreContext} from '../../context/StoreContext';
+const PlaceOrder = () => {
+  const {getTotalCartAmount} = useContext(StoreContext)
   return (
-    <div>placeorder</div>
-  )
-}
+    <form className="place-order">
+      <div className="place-order-left">
+        <p className="title">Delivery Information</p>
+        <div className="multi-fields">
+          <input type="text" placeholder="First name" />
+          <input type="text" placeholder="Last name" />
+        </div>
+        <input type="email" placeholder="Email address" />
+        <input type="text" placeholder="Street" />
+        <div className="multi-fields">
+          <input type="text" placeholder="City" />
+          <input type="text" placeholder="State" />
+        </div>
+        <div className="multi-fields">
+          <input type="text" placeholder="Zip code" />
+          <input type="text" placeholder="Country" />
+        </div>
+        <input type="text" placeholder="Phone" />
+      </div>
 
-export default placeorder
+      <div className="place-order-right">
+        <div className="cart-total">
+          <h2>Cart Totals</h2>
+          <div className="cart-total-details">
+            <p>Subtotal</p>
+            <p>₹{getTotalCartAmount()}</p>
+          </div>
+          <hr />
+          <div className="cart-total-details">
+            <b> Total Amount </b>
+            <b> ₹{getTotalCartAmount() + 50}</b>
+          </div>
+          <button>Payment</button>
+        </div>
+      </div>
+
+
+
+    </form>
+  );
+};
+
+export default PlaceOrder;

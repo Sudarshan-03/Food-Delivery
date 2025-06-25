@@ -1,10 +1,14 @@
 .food-item{
     width : 100%;
-    margin: auto;
     border-radius: 15px;
     box-shadow: 0 0px 10px #00000015;
-    transition: 3s;
-    animation: Infade 2s;
+    animation: Infade 1s;
+}
+.food-item:hover{
+    cursor: pointer;
+    box-shadow: 0 0px 20px rgb(216, 88, 65);
+    transform: scale(1.07);
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 .food-item-img{
     width: 100%;

@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     gap : 20px;
+    padding: 10px;
     
 }
 .explore-menu h1 {
@@ -21,6 +22,7 @@
     text-align: center;
     margin: 15px 0px;
     overflow-x: scroll;
+    padding: 23px;
 }
 .explore-menu-list ::-webkit-scrollbar{
     display : none;
@@ -41,7 +43,10 @@
      transition: all 0.3s ;
 }
 .explore-menu-list-items  img:hover{
-    padding: 8px;
+    transform: scale(1.1);
+    box-shadow: 0 0px 20px rgb(229, 88, 63);
+
+
 }
 .explore-menu-list-items  p{
     margin-top: 10px;
@@ -58,8 +63,14 @@
 }
 .explore-menu-list-items .active{
     border: 5px solid tomato;
-    padding: 8px;
     box-shadow: 0px 0px 5px rgba(255, 99, 71, 0.5);
 
 
+}
+@media (max-width: 1050px){
+    .explore-menu-text{
+        max-width: 100%;
+        font-size: 14px;
+    }
+   
 }
