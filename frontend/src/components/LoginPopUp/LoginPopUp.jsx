@@ -20,26 +20,24 @@ const LoginPopUp = ({setShowLogin}) => {
         const value = event.target.value;
         setData(data=>({...data,[name]:value}))
     }
-    const onLogin = async (event) => {
-        event.preventDefault();
-        let apiUrl = url;
-        if (currState === "Login") {
-            apiUrl += "/api/user/login"
-        } else {
-            apiUrl +=  "/api/user/register"
-        }
+    const onLogin =async(event)=>{
+      event.preventDefault();
+      let newUrl = url;
+      if(currState==="Login"){
+        newUrl+="/api/user/login";
+      }else{
+        newUrl+="/api/user/resister";
+      }
+      const response =await axios.post(newUrl,data);
 
-        const response = await axios.post(apiUrl, data);
-        if (response.data.success) {
-            setToken(response.data.token);
-            localStorage.setItem("token", response.data.token);
-            setShowLogin(false);
-            
-        } 
-        else {
-            alert(response.data.message);
-        }
-    };
+      if(response.data.success){
+        setToken(response.data.token);
+        localStorage.setItem("token",response.data.token);
+        setShowLogin(false)
+      }else{
+        alert(response.data.message)
+      }
+    }
 
   return (
     <div className='login-popup'>

@@ -3,6 +3,8 @@ import React, { useContext, useState } from 'react';
 import './placeorder.css';
 import { StoreContext } from '../../context/StoreContext';
 import axios from 'axios';
+// import { useNavigate } from 'react-router-dom'
+
 
 const PlaceOrder = () => {
   const { getTotalCartAmount, token, food_list, cartItems, url } = useContext(StoreContext);
@@ -13,7 +15,7 @@ const PlaceOrder = () => {
     street: '',
     city: '',
     state: '',
-    zipCode: '',
+    zipcode: '',
     country: '',
     phone: ''
   });
@@ -21,7 +23,7 @@ const PlaceOrder = () => {
   const onChangeHandler = (event) => {
     const name = event.target.name;
     const value = event.target.value;
-    setData(prevData => ({ ...prevData, [name]: value }));
+    setData(data=>({...data,[name]:value}))
   };
 
   const placeOrder = async (event) => {
@@ -46,13 +48,22 @@ const PlaceOrder = () => {
          window.location.replace(session_url);
        }
         else {
-         alert("error ");
+         alert("Error placing order. Please try again.");
        }
   //   } catch (error) {
   //     toast.error("Order failed. Please try again.");
   //   }
   // 
-  };
+  }
+//  const navigate =useNavigate();
+//        useEffect(()=>{
+//          if(!token){
+//            navigate('/cart')
+//          }else if(getTotalCartAmount()==0) {
+//              navigate('/cart');
+//          }
+//        },[token])
+
 
   return (
     <form onSubmit={placeOrder} className="place-order">
@@ -69,7 +80,7 @@ const PlaceOrder = () => {
           <input required name='state' onChange={onChangeHandler} value={data.state} type="text" placeholder="State" />
         </div>
         <div className="multi-fields">
-          <input required name='zipCode' onChange={onChangeHandler} value={data.zipCode} type="text" placeholder="Zip code" />
+          <input required name='zipcode' onChange={onChangeHandler} value={data.zipcode} type="text" placeholder="Zip code" />
           <input required name='country' onChange={onChangeHandler} value={data.country} type="text" placeholder="Country" />
         </div>
         <input required name='phone' onChange={onChangeHandler} value={data.phone} type="text" placeholder="Phone" />
@@ -83,6 +94,12 @@ const PlaceOrder = () => {
             <p>₹{getTotalCartAmount()}</p>
           </div>
           <hr />
+          {/* // new Added */}
+          <div className="cart-total-details">
+                <p>Delivery Fee</p>
+                <p>₹{getTotalCartAmount()===0?0:50}</p>
+              </div>
+              <hr/>
           <div className="cart-total-details">
             <b> Total Amount </b>
             <b> ₹{getTotalCartAmount() + 50}</b>
@@ -96,5 +113,6 @@ const PlaceOrder = () => {
     </form>
   );
 };
+
 
 export default PlaceOrder;
