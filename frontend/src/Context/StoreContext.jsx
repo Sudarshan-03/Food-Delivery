@@ -1,7 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react';
 export const StoreContext = createContext(null);
 import { food_list } from '../assets/assets'
-
+import axios from "axios";
 
 const StoreContextProvider = (props) => {
     const [cartItems , setCartItems] = useState({});
@@ -20,18 +20,10 @@ const StoreContextProvider = (props) => {
             await axios.post(url + "/api/cart/add" ,{itemId} , {headers:{token}})
         }
     }
-    const removeCartItems = async (itemId)=>{
-         setCartItems(prev => {
-            const updatedCount = (prev[itemId] || 0) - 1;
-            if (updatedCount <= 0) {
-                const { [itemId]: _, ...rest } = prev;
-                return rest;
-            }
-
-            return { ...prev, [itemId]: updatedCount };
-        });
+  const removeCartItems = async (itemId)=>{
+        setCartItems((prev)=>({...prev,[itemId]:prev[itemId]-1}))
         if(token){
-            await axios.post(url + "/api/cart/remove" ,{itemId} , {headers:{token}})
+            await axios.post(url+"/api/cart/remove",{itemId},{headers:{token}})
         }
     }
     
@@ -56,12 +48,16 @@ const StoreContextProvider = (props) => {
         setCartItems(response.data.cartData);
     }
 
-    useEffect(() => {
-        const storedToken = localStorage.getItem("token");
-        if (storedToken) {
-            setToken(storedToken);
+     useEffect(()=>{
+        async function loadData(){
+            await fetchFoodList();
+            if(localStorage.getItem("token")){
+                setToken(localStorage.getItem("token"));
+                await loadCartData(localStorage.getItem("token"))
+            }
         }
-    }, []);
+        loadData();
+    },[])
     
     const contextValue = {
             food_list,
