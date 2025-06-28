@@ -4,9 +4,8 @@ import dotenv from "dotenv";
 dotenv.config();
 import Stripe from "stripe";
 
-if (!process.env.STRIPE_SECRET_KEY) {
-    throw new Error("STRIPE_SECRET_KEY environment variable is not set.");
-}
+
+
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 // placing user order for frontend
@@ -23,22 +22,22 @@ const placeOrder = async (req, res) => {
         await userModel.findByIdAndUpdate(req.body.userId,{cartData:{}});
         
         const line_items =req.body.items.map((item)=>({
-            price_data: {
-                currency: 'inr',
-                product_data: {
-                    name: item.name,
-                    images: item.image ? [item.image] : []
+                price_data: {
+                    currency: 'inr',
+                    product_data: {
+                        name: item.name,
+    
+                    },
+                    unit_amount: item.price * 100
                 },
-                unit_amount: item.price * 100
-            },
-            quantity: item.quantity
+                quantity: item.quantity
         }));
+
         line_items.push({
             price_data: {
                 currency: 'inr',
                 product_data: {
                     name: 'Delivery Charges',
-                    images: []
                 },
                 unit_amount: 2 * 100
             },
