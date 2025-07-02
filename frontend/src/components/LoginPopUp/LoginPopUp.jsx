@@ -2,7 +2,7 @@ import React from 'react'
 import './LoginPopUp.css'
 import  { useState, useContext } from 'react'
 import { assets } from '../../assets/assets'
-import { StoreContext } from '../../context/StoreContext'
+import { StoreContext } from '../../Context/StoreContext'
 import axios from 'axios'
 
 const LoginPopUp = ({setShowLogin}) => {
@@ -26,7 +26,7 @@ const LoginPopUp = ({setShowLogin}) => {
       if(currState==="Login"){
         newUrl+="/api/user/login";
       }else{
-        newUrl+="/api/user/resister";
+        newUrl+="/api/user/register";
       }
       const response =await axios.post(newUrl,data);
 

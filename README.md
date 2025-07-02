@@ -6,6 +6,7 @@ A full-stack food delivery web application built using the MERN stack (MongoDB, 
 ---
 
 ## 📁 Project Structure
+
 food-delivery-app/
 ├── backend/
 │   ├── server.js
@@ -14,13 +15,14 @@ food-delivery-app/
 │   ├── controllers/
 │   └── models/
 ├── frontend/
-│   ├── src/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   ├── App.js
-│   │   └── index.js
+│   └── src/
+│       ├── components/
+│       ├── pages/
+│       ├── App.js
+│       └── index.js
 ├── uploads/
-└── README.md
+├── README.md
+└── LICENSE
 
 ---
 
