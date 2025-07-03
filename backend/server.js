@@ -23,13 +23,8 @@ app.use("/api/cart", cartRouter)
 app.use("/api/order", orderRouter)
 
 
-app.get("/",(req,res)=>{
-    res.send({
-        activeStatus: true,
-        error: false,
-        message: "Welcome to Food Delivery"
-    })
-
+app.get("/", (req, res) => {
+    res.send("Food delivery backend is running successfully!")
 })
 
 
