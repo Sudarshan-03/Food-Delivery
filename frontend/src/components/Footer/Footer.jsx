@@ -31,8 +31,7 @@ const Footer = ({ menu, setMenu }) => {
                 <h2>Get In Touch</h2>
                 <ul>
                     <li>+91 9358073903</li>
-                    <li>+91 8852883326</li>
-                    <li>Email: kaniskyaduvanshi3@gmail.com </li>
+                    <li>Email: firstbites@ZestyBites.in </li>
                 </ul>
                  <div className="footer-social-icons-call">
                    

@@ -4,11 +4,14 @@ import  { useState, useContext } from 'react'
 import { assets } from '../../assets/assets'
 import { StoreContext } from '../../Context/StoreContext'
 import axios from 'axios'
+//import { ToastContainer, toast } from "react-toastify"
 
 const LoginPopUp = ({setShowLogin}) => {
-    const {url ,setToken} = useContext(StoreContext)
+    const {url ,setToken } = useContext(StoreContext)
     
     const [currState, setCurrState] = useState("Sign Up");
+
+
 
     const [data ,setData] = useState({
         name:"",
@@ -31,8 +34,10 @@ const LoginPopUp = ({setShowLogin}) => {
       const response =await axios.post(newUrl,data);
 
       if(response.data.success){
+        //toast.success(response.data.message || "Login Successful");
         setToken(response.data.token);
         localStorage.setItem("token",response.data.token);
+        //localStorage.setItem("keepLogin",JSON.stringify(true));
         setShowLogin(false)
       }else{
         alert(response.data.message)
@@ -55,10 +60,12 @@ const LoginPopUp = ({setShowLogin}) => {
              <button type='submit'>
                     {currState === "Sign Up" ? "Create Account" : "Login"}
                 </button>
-                <div className="login-popup-condition">
-                    <input type="checkbox"  required/>
-                    <p>I accept the <span>Terms & Conditions</span> and <span>Privacy Policy</span></p>
-                </div>
+                {currState === "Sign Up" && (
+                  <div className="login-popup-condition">
+                      <input type="checkbox" required />
+                      <p>I accept the <span>Terms & Conditions</span> and <span>Privacy Policy</span></p>
+                  </div>
+                )}
                 { currState === "Sign Up" 
                 ? <p> Already have an account ? <span className="a" onClick={()=>setCurrState("Login")}> Login</span></p>
                 : <p> Create a new account ? <span className="a" onClick={()=>setCurrState("Sign Up")}> Sign Up</span></p>

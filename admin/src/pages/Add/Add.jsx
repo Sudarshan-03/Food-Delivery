@@ -2,11 +2,11 @@ import React, { useState } from 'react'
 import './Add.css'
 import {assets} from '../../assets/assets'; // Adjust the path as needed to where your assets are exported
 import axios from 'axios';
-import { Navigate, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-const Add = () => {
-  const url = 'http://localhost:4000' ;
+const Add = ({url}) => {
+
+  //const url = 'http://localhost:4000' ;
   const [image, setImage] = useState(false);
   const [data, setData] = useState({
     name : "",
@@ -22,8 +22,6 @@ const Add = () => {
    }
  const onSubmithandler = async (event) => {
   event.preventDefault();
-  console.log('Form submitted:', data, image);
-
   const formData = new FormData();
   formData.append('name', data.name);
   formData.append('description', data.description);
@@ -58,7 +56,7 @@ const Add = () => {
           <label htmlFor="image">
             <img src={image?URL.createObjectURL(image):assets.upload_area} alt="" />
           </label>
-          <input type="file" id="image" name="image" hidden required onChange={(e) => setImage(e.target.files[0])} />
+         <input onChange={(e)=>setImage(e.target.files[0])} type='file' id='image' hidden required />
         </div>
         <div className="add-product-name flex-col">
           <p>Product name</p>
@@ -74,7 +72,7 @@ const Add = () => {
             <select onChange={onChangeHandler} name="category" value={data.category}>
               <option value="Salad">Salad</option>
               <option value="Rolls">Rolls</option>
-              <option value="Deserts">Deserts</option>
+              <option value="Desserts">Desserts</option>
               <option value="Sandwich">Sandwich</option>
               <option value="Cake">Cake</option>
               <option value="Pure Veg">Pure Veg</option>

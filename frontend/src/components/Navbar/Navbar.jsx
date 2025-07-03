@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react'
 import './Navbar.css'
 import { assets } from '../../assets/assets'
 import { Link, useNavigate } from 'react-router-dom'
-import { StoreContext} from '../../context/StoreContext'
+import { StoreContext} from '../../Context/StoreContext'
 import { FaSun, FaMoon } from 'react-icons/fa';
 
 const Navbar = ({setShowLogin}) => {
@@ -13,7 +13,7 @@ const Navbar = ({setShowLogin}) => {
   const logout = () => {
     localStorage.removeItem("token");
     setToken("");
-    navigate("/")
+    navigate('/');
   }
    const [isDark, setIsDark] = useState(false);
 
@@ -55,7 +55,7 @@ const Navbar = ({setShowLogin}) => {
         : <div className='navbar-profile'>
             <img src={assets.profile_icon} alt="" />
             <ul className="nav-profile-dropdown">
-              <li><img src={assets.bag_icon} alt="" /><p>Orders</p></li>
+              <Link to="/myorders"><li><img src={assets.bag_icon} alt="" /><p>Orders</p></li></Link>
               <hr />
               <li onClick={logout} ><img  src={assets.logout_icon} alt="" /><p>LogOut</p></li>
             </ul>

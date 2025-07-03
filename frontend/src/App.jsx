@@ -9,13 +9,14 @@ import { useState } from 'react';
 import LoginPopUp from './components/LoginPopUp/LoginPopUp';
 import Verify from './pages/Verify/Verify';
 import MyOrders from './pages/MyOrders/MyOrders';
+//import { Navigate } from 'react-router-dom';
 
   
 import { useEffect } from 'react';
 
  const App = () => {
   const [showLogin, setShowLogin] = useState(false);
-
+  //const isLogin = JSON.parse(localStorage.getItem("keepLogin"))
  
 
    return (
@@ -27,7 +28,7 @@ import { useEffect } from 'react';
         <Route path="/" element={<Home />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/placeorder" element={<PlaceOrder />}/>
-         <Route path='/verify' element={<Verify/>} />
+        <Route path='/verify' element={<Verify/>} />
         <Route path='/myorders' element={<MyOrders/>} />
       </Routes>
      </div>

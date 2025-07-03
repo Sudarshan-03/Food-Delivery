@@ -4,11 +4,12 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
-const List = () => {
-  const url = 'http://localhost:4000';
+const List = ({url}) => {
+  //const url = 'http://localhost:4000';
 
 const [list, setList] = useState([]);
-const fatchList = async () => {
+
+ const fatchList = async () => {
   
     const response = await axios.get(`${url}/api/food/list`);
     if (response.data.success) {
@@ -47,7 +48,7 @@ useEffect(()=>{
           {list.map((item, index) => {
             return (
               <div key={index} className='list-table-format'>
-                <img src={`${url}/images/${item.image}`} alt="" />
+                <img src={`${url}/images/` +item.image} alt="" />
                 <p>{item.name}</p>
                 <p>{item.category}</p>
                 <p>₹{item.price}</p>
