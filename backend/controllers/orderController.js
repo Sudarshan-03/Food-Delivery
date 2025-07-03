@@ -2,6 +2,7 @@ import orderModel from "../models/orderModel.js";
 import userModel from "../models/userModel.js";
 import dotenv from "dotenv";
 dotenv.config();
+const FRONTEND_URL = process.env.FRONTEND_URL;
 import Stripe from "stripe";
 
 
@@ -13,7 +14,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 // placing user order for frontend
 const placeOrder = async (req, res) => {
-    const frontend_url = 'http://localhost:5173';
+    const frontend_url = FRONTEND_URL || 'http://localhost:5173';
     try { 
         const newOrder = new orderModel({
             userId :req.body.userId,
