@@ -74,3 +74,19 @@
     }
    
 }
+
+body.dark-mode .explore-menu h1 {
+  color: #f0f0f0;
+}
+
+body.dark-mode .explore-menu-text {
+  color: #ccc;
+}
+
+body.dark-mode .explore-menu-list-items p {
+  color: #e0e0e0;
+}
+
+body.dark-mode .explore-menu hr {
+  background-color: #444;
+}

@@ -16,6 +16,11 @@ const MyOrders = () => {
     useEffect(() => {
         if (token) {
             fetchOrders();
+        } else {
+            const storedToken = localStorage.getItem("token");
+            if (storedToken) {
+                fetchOrders(); // use existing token
+            }
         }
         // eslint-disable-next-line
     }, [token]);

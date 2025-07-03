@@ -8,17 +8,29 @@ import { FaSun, FaMoon } from 'react-icons/fa';
 const Navbar = ({setShowLogin}) => {
    const [menu,setMenu] = useState("Home");
 
-   const {getTotalCartAmount , token,setToken} = useContext(StoreContext);
+   const {getTotalCartAmount , token,setToken, user} = useContext(StoreContext);
    const navigate = useNavigate();
   const logout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
     setToken("");
     navigate('/');
   }
    const [isDark, setIsDark] = useState(false);
 
+   useEffect(() => {
+     const savedTheme = localStorage.getItem("theme");
+     if (savedTheme === "dark") {
+       setIsDark(true);
+     }
+   }, []);
+
    const toggleTheme = () => {
-     setIsDark(prev => !prev);
+     setIsDark(prev => {
+       const nextTheme = !prev;
+       localStorage.setItem("theme", nextTheme ? "dark" : "light");
+       return nextTheme;
+     });
    };
 
   useEffect(() => {
@@ -55,7 +67,7 @@ const Navbar = ({setShowLogin}) => {
         : <div className='navbar-profile'>
             <img src={assets.profile_icon} alt="" />
             <ul className="nav-profile-dropdown">
-              <Link to="/myorders"><li><img src={assets.bag_icon} alt="" /><p>Orders</p></li></Link>
+              <Link to="/myorders"><li><img src={assets.bag_icon}  alt="" /><p>Orders</p></li></Link>
               <hr />
               <li onClick={logout} ><img  src={assets.logout_icon} alt="" /><p>LogOut</p></li>
             </ul>

@@ -15,7 +15,10 @@ import MyOrders from './pages/MyOrders/MyOrders';
 import { useEffect } from 'react';
 
  const App = () => {
-  const [showLogin, setShowLogin] = useState(false);
+  const [showLogin, setShowLogin] = useState(() => {
+    const user = localStorage.getItem("user");
+    return !user; // show login popup if no user is stored
+  });
   //const isLogin = JSON.parse(localStorage.getItem("keepLogin"))
  
 
@@ -27,9 +30,9 @@ import { useEffect } from 'react';
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/placeorder" element={<PlaceOrder />}/>
-        <Route path='/verify' element={<Verify/>} />
-        <Route path='/myorders' element={<MyOrders/>} />
+        <Route path="/placeorder" element={<PlaceOrder setShowLogin={setShowLogin} />}/>
+        <Route path='/verify' element={<Verify setShowLogin={setShowLogin} />} />
+        <Route path='/myorders' element={<MyOrders setShowLogin={setShowLogin} />} />
       </Routes>
      </div>
      <Footer/>

@@ -6,10 +6,16 @@ import axios from "axios";
 
 const StoreContextProvider = (props) => {
     const [cartItems , setCartItems] = useState({});
-    //const url = 'http://localhost:4000'
+    const url = 'http://localhost:4000'
 
-   const url = import.meta.env.VITE_BACKEND_URL || 'http://localhost:4000';
-    const [ token,setToken] = useState("")
+    const [ token,setToken] = useState(() => localStorage.getItem("token") || "");
+    const [user, setUser] = useState(() => {
+  try {
+    return JSON.parse(localStorage.getItem("user")) || null;
+  } catch (e) {
+    return null;
+  }
+});
     
 
     const addToCart = async (itemId) => {
@@ -72,6 +78,8 @@ const StoreContextProvider = (props) => {
             url,
             token,
             setToken,
+            user,
+            setUser,
     }
     return (
         <StoreContext.Provider value  = {contextValue}>

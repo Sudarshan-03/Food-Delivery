@@ -1,13 +1,28 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 
 import './placeorder.css';
 import { StoreContext } from '../../Context/StoreContext';
 import axios from 'axios';
-// import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 
 const PlaceOrder = () => {
-  const { getTotalCartAmount, token, food_list, cartItems, url } = useContext(StoreContext);
+  const { getTotalCartAmount, token, food_list, cartItems, url, setCartItems } = useContext(StoreContext);
+  const navigate = useNavigate();
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+    if (!user) {
+      navigate("/");
+    }
+  }, []);
+  useEffect(() => {
+    const isDark = localStorage.getItem("theme") === "dark";
+    if (isDark) {
+      document.body.classList.add("dark");
+    } else {
+      document.body.classList.remove("dark");
+    }
+  }, []);
   const [data, setData] = useState({
     firstName: '',
     lastName: '',
@@ -19,6 +34,8 @@ const PlaceOrder = () => {
     country: '',
     phone: ''
   });
+
+  const [paymentMethod, setPaymentMethod] = useState("cod");
 
   const onChangeHandler = (event) => {
     const name = event.target.name;
@@ -41,11 +58,19 @@ const PlaceOrder = () => {
     address:data,
     items: orderItems,
     amount:getTotalCartAmount() + 50,
+    paymentMethod: paymentMethod,
     }
       let response = await axios.post(url +"/api/order/place",orderData, {headers:{token} });
        if (response.data.success) {
-         const { session_url } = response.data;
-         window.location.replace(session_url);
+         if (paymentMethod === "online") {
+           const { session_url } = response.data;
+           setCartItems({});
+           window.location.replace(session_url);
+         } else {
+           alert("Order placed !! Par Bhai payment mere phone no. pe kar de !!");
+           setCartItems({});
+           navigate("/myorders");
+         }
        }
         else {
          alert("Error placing order. Please try again.");
@@ -91,7 +116,33 @@ const PlaceOrder = () => {
             <b> Total Amount </b>
             <b> ₹{getTotalCartAmount() + 50}</b>
           </div>
-          <button type="submit">Payment</button>
+          <div className="cart-total-details">
+            <label className="payment-button"
+              
+            >
+              <input
+                type="radio"
+                value="cod"
+                checked={paymentMethod === "cod"}
+                onChange={() => setPaymentMethod("cod")}
+                style={{ marginRight: "8px" }}
+              />
+              Cash on Delivery
+            </label>
+            <label className="payment-button"
+      
+            >
+              <input
+                type="radio"
+                value="online"
+                checked={paymentMethod === "online"}
+                onChange={() => setPaymentMethod("online")}
+                style={{ marginRight: "8px" }}
+              />
+              Online Payment
+            </label>
+          </div>
+          <button className='payment'  type="submit">Payment</button>
         </div>
       </div>
 
@@ -102,4 +153,4 @@ const PlaceOrder = () => {
 }
 
 
-export default PlaceOrder;
+export default PlaceOrder

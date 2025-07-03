@@ -35,3 +35,21 @@ max-width: max(40%, 500px);
 .place-order .cart-total button{
 margin-top: 30px;
 }
+
+
+.payment-button {
+    display: block;
+    margin-bottom: 8px;
+    color: #444343;
+    padding: 8px 12px;
+    border: 2px solid rgb(236, 130, 112);
+    border-radius: 6px;
+    background-color: #fff;
+    cursor: pointer;
+}
+.payment-button input {
+   color: rgb(51, 136, 136);
+    margin-right: 8px;
+    cursor: pointer;
+    
+}

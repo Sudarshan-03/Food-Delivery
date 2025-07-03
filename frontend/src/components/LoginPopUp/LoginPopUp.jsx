@@ -37,6 +37,7 @@ const LoginPopUp = ({setShowLogin}) => {
         //toast.success(response.data.message || "Login Successful");
         setToken(response.data.token);
         localStorage.setItem("token",response.data.token);
+        localStorage.setItem("user", JSON.stringify(response.data.user));
         //localStorage.setItem("keepLogin",JSON.stringify(true));
         setShowLogin(false)
       }else{

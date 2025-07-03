@@ -95,9 +95,48 @@
 @media (max-width:750px) {
  .cart-bottom{
    flex-direction: column-reverse;
-} I
+}
  .cart-promocode{
   justify-content: start;
 }
+}
+
+
+body.dark-mode .cart-item-title {
+  color: #e0e0e0;
+}
+
+body.dark-mode .cart-item-item {
+  color: #f0f0f0;
+}
+
+body.dark-mode .cart hr,
+body.dark-mode .cart-total hr {
+  background-color: #444;
+}
+
+body.dark-mode .cart-total-detail {
+  color: #ccc;
+}
+
+body.dark-mode .cart-promocode p {
+  color: #bbb;
+}
+
+body.dark-mode .cart-promocode-input {
+  background-color: #333;
+}
+
+body.dark-mode .cart-promocode-input input {
+  color: #eee;
+}
+
+body.dark-mode .cart-promocode-input button {
+  background-color: #444;
+  color: #fff;
+}
+
+body.dark-mode .cart-total button {
+  background-color: tomato;
 }
 
