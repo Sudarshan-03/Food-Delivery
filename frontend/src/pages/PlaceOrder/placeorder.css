@@ -27,6 +27,10 @@ outline-color: tomato;
 display: flex;
 gap: 10px;
 }
+
+.place-order-left .multi-fields input {
+  flex: 1;
+}
 .place-order-right{
 
 width: 100%;
@@ -52,4 +56,25 @@ margin-top: 30px;
     margin-right: 8px;
     cursor: pointer;
     
+}
+
+@media (max-width: 768px) {
+  .place-order {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .place-order-left,
+  .place-order-right {
+    max-width: 80%;
+  }
+
+  .place-order-left .multi-fields {
+    flex-direction: column;
+  }
+
+  .payment-button {
+    width: 100%;
+    text-align: left;
+  }
 }
