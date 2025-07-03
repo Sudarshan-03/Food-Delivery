@@ -24,7 +24,12 @@ app.use("/api/order", orderRouter)
 
 
 app.get("/",(req,res)=>{
-    res.send("hello API")
+    res.send({
+        activeStatus: true,
+        error: false,
+        message: "Welcome to Food Delivery"
+    })
+
 })
 
 
