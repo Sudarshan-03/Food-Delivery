@@ -32,4 +32,4 @@ export const assets ={
     linkedin
 }
 
-export const url = "https://food-delivery-backend-rkui.onrender.com"
+export const url = "https://zestybites.onrender.com"
