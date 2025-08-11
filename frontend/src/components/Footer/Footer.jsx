@@ -21,10 +21,10 @@ const Footer = ({ menu, setMenu }) => {
             <div className="footer-content-center">
                 <h2>Company</h2>
                 <ul>
-                    <li>About Us</li>
-                    <li>Contact Us</li>
-                    <li>Careers</li>
-                    <li>Blog</li>
+                    <li><Link to="/about">About Us</Link></li>
+                    <li><Link to="/contact">Contact Us</Link></li>
+                    <li><Link to="/careers">Careers</Link></li>
+                    <li><Link to="/blog">Blog</Link></li>
                 </ul>
             </div>
             <div className="footer-content-right">

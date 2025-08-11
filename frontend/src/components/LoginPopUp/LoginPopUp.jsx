@@ -4,7 +4,7 @@ import  { useState, useContext } from 'react'
 import { assets } from '../../assets/assets'
 import { StoreContext } from '../../Context/StoreContext'
 import axios from 'axios'
-//import { ToastContainer, toast } from "react-toastify"
+import { ToastContainer, toast } from "react-toastify"
 
 const LoginPopUp = ({setShowLogin}) => {
     const {url ,setToken } = useContext(StoreContext)
@@ -31,10 +31,12 @@ const LoginPopUp = ({setShowLogin}) => {
       }else{
         newUrl+="/api/user/register";
       }
-      const response =await axios.post(newUrl,data);
+      const response = await axios.post(newUrl,data);
 
       if(response.data.success){
-        //toast.success(response.data.message || "Login Successful");
+        toast.success(response.data.message || "Login Successful");
+        toast.info("You have successfully logged in!");
+        localStorage.setItem("loginSuccess", "true");
         setToken(response.data.token);
         localStorage.setItem("token",response.data.token);
         localStorage.setItem("user", JSON.stringify(response.data.user));
@@ -72,6 +74,7 @@ const LoginPopUp = ({setShowLogin}) => {
                 : <p> Create a new account ? <span className="a" onClick={()=>setCurrState("Sign Up")}> Sign Up</span></p>
                 }        
         </form>
+        <ToastContainer />
     </div>
   )
 }

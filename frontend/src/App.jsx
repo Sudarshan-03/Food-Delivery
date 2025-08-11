@@ -10,9 +10,13 @@ import LoginPopUp from './components/LoginPopUp/LoginPopUp';
 import Verify from './pages/Verify/Verify';
 import MyOrders from './pages/MyOrders/MyOrders';
 //import { Navigate } from 'react-router-dom';
-
+import AboutUs from "./pages/AboutUs/AboutUs";
+import ContactUs from "./pages/ContactUs/ContactUs";
+import Careers from "./pages/Careers/Careers";
+import Blog from "./pages/Blog/Blog";
   
 import { useEffect } from 'react';
+import { toast } from 'react-toastify';
 
  const App = () => {
   const [showLogin, setShowLogin] = useState(() => {
@@ -21,6 +25,14 @@ import { useEffect } from 'react';
   });
   //const isLogin = JSON.parse(localStorage.getItem("keepLogin"))
  
+  useEffect(() => {
+    const loginSuccess = localStorage.getItem('loginSuccess');
+    if (loginSuccess) {
+      toast.success('Welcome! Enjoy the taste of our food!');
+      toast.info("You have successfully logged in!");
+      localStorage.removeItem('loginSuccess');
+    }
+  }, []);
 
    return (
     <> 
@@ -32,6 +44,10 @@ import { useEffect } from 'react';
         <Route path="/cart" element={<Cart />} />
         <Route path="/placeorder" element={<PlaceOrder setShowLogin={setShowLogin} />}/>
         <Route path='/verify' element={<Verify setShowLogin={setShowLogin} />} />
+        <Route path="/about" element={<AboutUs />} />
+        <Route path="/contact" element={<ContactUs />} />
+        <Route path="/careers" element={<Careers />} />
+        <Route path="/blog" element={<Blog />} />
         <Route path='/myorders' element={<MyOrders setShowLogin={setShowLogin} />} />
       </Routes>
      </div>
