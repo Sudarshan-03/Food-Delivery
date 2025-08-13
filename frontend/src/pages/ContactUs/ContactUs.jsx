@@ -10,28 +10,34 @@ const ContactUs = () => {
     message: ''
   });
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
+const handleChange = (e) => {
+  setFormData({
+    ...formData,
+    [e.target.name]: e.target.value
+  });
+};
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission here
-    console.log('Form submitted:', formData);
-    alert('Thank you for your message! We\'ll get back to you soon.');
-    // Reset form
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      subject: '',
-      message: ''
-    });
-  };
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
+  try {
+    const res = await fetch('http://localhost:4000/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData)
+    });
+
+    if (res.ok) {
+      alert('Message sent successfully!');
+      setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
+    } else {
+      alert('Failed to send message');
+    }
+  } catch (err) {
+    console.error(err);
+    alert('Error sending message');
+  }
+};
   return (
     <section className="contact-section">
       <div className="contact-header">
@@ -44,7 +50,7 @@ const ContactUs = () => {
             <div className="info-card">
               {/* <div className="info-icon">📍</div> */}
               <h3>Our Location</h3>
-              <p>123 Food Street<br />Downtown District <br/> City, State IN <br/> 12345</p>
+              <p>India Mart C/o Burger Point<br />Sector K, LDA Colony <br/> Lucknow, Uttar Pradesh <br/> 226012, India</p>
             </div>
 
             <div className="info-card">
@@ -57,8 +63,8 @@ const ContactUs = () => {
             <div className="info-card">
               {/* <div className="info-icon">✉️</div> */}
               <h3>Email Address</h3>
-              <p>General Inquiries:<br /><a href="mailto:hello@quickbite.com">hello@quickbite.com</a></p>
-              <p>Support:<br /><a href="mailto:support@quickbite.com">support@quickbite.com</a></p>
+              <p>General Inquiries:<br /><a href="mailto:hello@zestybites.com">hello@zestybites.com</a></p>
+              <p>Support:<br /><a href="mailto:support@zestybites.com">support@zestybites.com</a></p>
             </div>
 
           </div>
@@ -100,17 +106,6 @@ const ContactUs = () => {
               </div>
 
               <div className="form-row">
-                {/* <div className="form-group">
-                  <label htmlFor="phone">Phone Number</label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    placeholder="Enter your phone number"
-                  />
-                </div> */}
                 <div className="form-group">
                   <label htmlFor="subject">Subject *</label>
                   <select
