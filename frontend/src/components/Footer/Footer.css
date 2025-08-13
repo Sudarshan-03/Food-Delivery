@@ -1,12 +1,12 @@
 .footer{
     background-color: black;
     color: #d9d9d9;
-    padding: 20px 8vw;
+    padding: 10px 8vw;
     display: flex;  
     flex-direction: column;
     align-items: center;
-    gap : 20px; 
-    padding-top: 80px;
+    gap : 15px; 
+    padding-top: 40px;
     margin-top: 50px;
 }
 .footer-content{
@@ -19,17 +19,15 @@
 }
 .logo2{
     width: 150px; /* or any fixed width */
-    margin-top: -50px;
+    margin-top: -30px;
     cursor: pointer;
 }
-
-.footer-social-icons{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    filter: brightness(0) invert(1); /* Makes icons white */
+.footer-content-left {
+  display: flex;
+  align-items: center; /* Vertically center the items */
+  gap: 16px; /* Optional: space between image and text */
 }
-.footer-content-left, .footer-content-right, .footer-content-center{
+.footer-content-right, .footer-content-center {
     display: flex;
     flex-direction: column;
     gap: 20px;

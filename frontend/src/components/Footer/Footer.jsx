@@ -8,14 +8,11 @@ const Footer = ({ menu, setMenu }) => {
     <div className='footer' id='footer'>
         <div className="footer-content">
             <div className="footer-content-left">
-                <Link to = '/' onClick={()=>setMenu("Home")} className={menu=="Home"?"active":" "}><img className='logo2'src={assets.logo3} alt="" /></Link>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium doloremque doloribus dolor eveniet animi voluptas modi nobis, obcaecati mollitia pariatur magnam maiores, sapiente fugit excepturi repellendus rerum quod! Numquam laborum sed distinctio adipisci natus, deleniti alias quisquam minus consectetur repellat eveniet labore! Ipsum ad quisquam maiores, accusantium eveniet voluptatem dignissimos.</p>
-                <div className="footer-social-icons">
-                    <img src={assets.facebook} alt="" />
-                     <img src={assets.youtube} alt="" />
-                    <img src={assets.linkedin} alt="" />
-                    <img src={assets.instagram} alt="" />
-                   
+                <div className="footer-logo-text">
+                    <Link to='/' onClick={() => setMenu("Home")} className={menu=="Home" ? "active" : ""}>
+                        <img className='logo2' src={assets.logo3} alt="" />
+                    </Link>
+                    <p>We are passionate about delivering fresh, delicious meals right to your doorstep. Our mission is to make dining easy, enjoyable, and accessible to everyone. With a dedicated team and a commitment to quality, we ensure every order meets the highest standards of taste and service.</p>
                 </div>
             </div>
             <div className="footer-content-center">
@@ -24,7 +21,7 @@ const Footer = ({ menu, setMenu }) => {
                     <li><Link to="/about">About Us</Link></li>
                     <li><Link to="/contact">Contact Us</Link></li>
                     <li><Link to="/careers">Careers</Link></li>
-                    <li><Link to="/blog">Blog</Link></li>
+                    {/* <li><Link to="/blog">Blog</Link></li> */}
                 </ul>
             </div>
             <div className="footer-content-right">

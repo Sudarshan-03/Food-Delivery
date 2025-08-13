@@ -13,7 +13,7 @@ import MyOrders from './pages/MyOrders/MyOrders';
 import AboutUs from "./pages/AboutUs/AboutUs";
 import ContactUs from "./pages/ContactUs/ContactUs";
 import Careers from "./pages/Careers/Careers";
-import Blog from "./pages/Blog/Blog";
+//import Blog from "./pages/Blog/Blog";
   
 import { useEffect } from 'react';
 import { toast } from 'react-toastify';
@@ -47,7 +47,7 @@ import { toast } from 'react-toastify';
         <Route path="/about" element={<AboutUs />} />
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/careers" element={<Careers />} />
-        <Route path="/blog" element={<Blog />} />
+        {/* <Route path="/blog" element={<Blog />} /> */}
         <Route path='/myorders' element={<MyOrders setShowLogin={setShowLogin} />} />
       </Routes>
      </div>
