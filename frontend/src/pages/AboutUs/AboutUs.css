@@ -135,3 +135,33 @@
     grid-template-columns: 1fr;
   }
 }
+
+.dark-theme .about-section {
+  background: #1a1a1a;
+  color: #fff;
+}
+
+.dark-theme .about-content h2 {
+  color: #fff;
+}
+
+.dark-theme .about-content p {
+  color: #ccc;
+}
+
+.dark-theme .highlight-text {
+  color: #ff8c00;
+}
+
+.dark-theme .about-image {
+  box-shadow: 0 15px 35px rgba(255, 255, 255, 0.1);
+}
+
+.dark-theme .stat-card {
+  background: #2c2c2c;
+  color: #fff;
+}
+
+.dark-theme .stat-card:hover {
+  box-shadow: 0 5px 12px rgba(255, 255, 255, 0.2);
+}

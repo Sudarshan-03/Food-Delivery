@@ -9,20 +9,6 @@ import { useNavigate } from 'react-router-dom'
 const PlaceOrder = () => {
   const { getTotalCartAmount, token, food_list, cartItems, url, setCartItems } = useContext(StoreContext);
   const navigate = useNavigate();
-  useEffect(() => {
-    const user = localStorage.getItem("user");
-    if (!user) {
-      navigate("/");
-    }
-  }, []);
-  useEffect(() => {
-    const isDark = localStorage.getItem("theme") === "dark";
-    if (isDark) {
-      document.body.classList.add("dark");
-    } else {
-      document.body.classList.remove("dark");
-    }
-  }, []);
   const [data, setData] = useState({
     firstName: '',
     lastName: '',
@@ -34,6 +20,45 @@ const PlaceOrder = () => {
     country: '',
     phone: ''
   });
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+    if (!user) {
+      navigate("/");
+    } else {
+      const parsedUser = JSON.parse(user);
+      console.log("Parsed User:", parsedUser);
+      // Check both parsedUser.email and parsedUser.user?.email
+      let email = "";
+      let name = "";
+      if (parsedUser && (parsedUser.email || parsedUser.user?.email)) {
+        email = parsedUser.email ? parsedUser.email : (parsedUser.user?.email || "");
+      }
+      if (parsedUser && (parsedUser.name || parsedUser.user?.name)) {
+        name = parsedUser.name ? parsedUser.name : (parsedUser.user?.name || "");
+      }
+      let firstName = "";
+      let lastName = "";
+      if (name) {
+        const [fName, ...lastNameParts] = name.split(" ");
+        firstName = fName || "";
+        lastName = lastNameParts.join(" ");
+      }
+      setData(prev => ({
+        ...prev,
+        firstName,
+        lastName,
+        email
+      }));
+    }
+  }, []);
+  useEffect(() => {
+    const isDark = localStorage.getItem("theme") === "dark";
+    if (isDark) {
+      document.body.classList.add("dark");
+    } else {
+      document.body.classList.remove("dark");
+    }
+  }, []);
 
   const [paymentMethod, setPaymentMethod] = useState("cod");
 
@@ -82,20 +107,31 @@ const PlaceOrder = () => {
       <div className="place-order-left">
         <p className="title">Delivery Information</p>
         <div className="multi-fields">
-          <input  name='firstName' onChange={onChangeHandler} value={data.firstName} type="text" placeholder="First name" />
-          <input  name='lastName' onChange={onChangeHandler} value={data.lastName} type="text" placeholder="Last name" />
+          <input required name='firstName' onChange={onChangeHandler} value={data.firstName} type="text" placeholder="First name" />
+          <input required name='lastName' onChange={onChangeHandler} value={data.lastName} type="text" placeholder="Last name" />
         </div>
-        <input   name='email' onChange={onChangeHandler} value={data.email} type="email" placeholder="Email address" />
-        <input   name='street' onChange={onChangeHandler} value={data.street} type="text" placeholder="Street" />
+        <input
+          type="text"
+          value={`${data.firstName} ${data.lastName}`}
+          placeholder="Full Name"
+          readOnly
+        />
+        <input
+          type="email"
+          value={data.email}
+          placeholder="Email"
+          readOnly
+        />
+        <input required name='street' onChange={onChangeHandler} value={data.street} type="text" placeholder="Street" />
         <div className="multi-fields">
-          <input   name='city' onChange={onChangeHandler} value={data.city} type="text" placeholder="City" />
-          <input   name='state' onChange={onChangeHandler} value={data.state} type="text" placeholder="State" />
+          <input required name='city' onChange={onChangeHandler} value={data.city} type="text" placeholder="City" />
+          <input required name='state' onChange={onChangeHandler} value={data.state} type="text" placeholder="State" />
         </div>
         <div className="multi-fields">
-          <input   name='zipcode' onChange={onChangeHandler} value={data.zipcode} type="text" placeholder="Zip code" />
-          <input   name='country' onChange={onChangeHandler} value={data.country} type="text" placeholder="Country" />
+          <input required name='zipcode' onChange={onChangeHandler} value={data.zipcode} type="text" placeholder="Zip code" />
+          <input required name='country' onChange={onChangeHandler} value={data.country} type="text" placeholder="Country" />
         </div>
-        <input   name='phone' onChange={onChangeHandler} value={data.phone} type="text" placeholder="Phone" />
+        <input required name='phone' onChange={onChangeHandler} value={data.phone} type="text" placeholder="Phone" />
       </div>
 
       <div className="place-order-right">

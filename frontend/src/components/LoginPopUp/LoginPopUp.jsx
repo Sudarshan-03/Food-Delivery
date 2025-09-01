@@ -31,19 +31,20 @@ const LoginPopUp = ({setShowLogin}) => {
       }else{
         newUrl+="/api/user/register";
       }
-      const response = await axios.post(newUrl,data);
-
-      if(response.data.success){
-        toast.success(response.data.message || "Login Successful");
-        toast.info("You have successfully logged in!");
-        localStorage.setItem("loginSuccess", "true");
-        setToken(response.data.token);
-        localStorage.setItem("token",response.data.token);
-        localStorage.setItem("user", JSON.stringify(response.data.user));
-        //localStorage.setItem("keepLogin",JSON.stringify(true));
-        setShowLogin(false)
-      }else{
-        alert(response.data.message)
+      try {
+        const response = await axios.post(newUrl,data);
+        if (response.data.success) {
+          toast.success(response.data.message || "Login Successful");
+          setToken(response.data.token);
+          localStorage.setItem("token", response.data.token);
+          localStorage.setItem("user", JSON.stringify(response.data.user));
+          setShowLogin(false);
+        } else {
+          toast.error(response.data.message || "Login Failed");
+        }
+      } catch (error) {
+        console.error(error);
+        toast.error("Something went wrong. Please try again.");
       }
     }
 

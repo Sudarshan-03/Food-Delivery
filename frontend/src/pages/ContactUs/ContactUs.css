@@ -293,3 +293,67 @@
   line-height: 1.3 !important;
   font-size: 0.9rem !important;
 }
+
+.dark-theme .contact-section {
+  background: #1a1a1a;
+  color: #fff;
+}
+
+.dark-theme .contact-header h1 {
+  color: #fff;
+}
+
+.dark-theme .contact-header p {
+  color: #ccc;
+}
+
+.dark-theme .info-card {
+  background: #2c2c2c;
+  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
+  border-left-color: #4d5bf9;
+}
+
+.dark-theme .info-card:hover {
+  box-shadow: 0 15px 40px rgba(255, 255, 255, 0.15);
+}
+
+.dark-theme .info-card h3 {
+  color: #fff;
+}
+
+.dark-theme .info-card p {
+  color: #ccc;
+}
+
+.dark-theme .info-card a {
+  color: #667eea;
+}
+
+.dark-theme .info-card a:hover {
+  color: #4d5bf9;
+}
+
+.dark-theme .contact-form-container {
+  background: linear-gradient(135deg, #3a3a3a 0%, #2c2c2c 100%);
+}
+
+.dark-theme .form-group label {
+  color: #fff;
+}
+
+.dark-theme .form-group input,
+.dark-theme .form-group select,
+.dark-theme .form-group textarea {
+  background: #333;
+  color: #fff;
+  border: 1px solid #555;
+}
+
+.dark-theme .submit-btn {
+  background: #667eea;
+}
+
+.dark-theme .submit-btn:hover {
+  background: #4d5bf9;
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3) !important;
+}

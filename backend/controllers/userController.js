@@ -47,12 +47,14 @@ const registerUser = async (req, res) => {
     // Hash password
     const salt = await bcrypt.genSalt(10)
     const hashedPassword = await bcrypt.hash(password, salt);
+    const verificationToken= Math.floor(100000 + Math.random() * 900000).toString();
 
     //new user to store
     const newUser = new userModel({
       name:name,
       email:email,
-      password:hashedPassword
+      password:hashedPassword,
+      verificationToken:verificationToken
     })
     // Save user to database
     const user = await newUser.save();
@@ -60,6 +62,8 @@ const registerUser = async (req, res) => {
     // Create JWT token
     const token = createToken(user._id)
     res.json({success: true, token});
+    console.log("User Registered Successfully");
+    console.log(user);
   }
   catch (error) {
     console.log(error);

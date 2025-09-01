@@ -57,7 +57,7 @@ const Careers = () => {
       coverLetter: e.target.coverLetter.value
     };
     try {
-      const res = await fetch('http://localhost:4000/api/application', {
+      const res = await fetch('https://food-delivery-backend-rkui.onrender.com/api/application', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(applicationData)
