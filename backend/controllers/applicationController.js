@@ -10,3 +10,13 @@ export const submitApplication = async (req, res) => {
     res.status(500).json({ error: 'Failed to submit application' });
   }
 };
+
+export const listApplications = async (req, res) => {
+  try {
+    const applications = await Application.find({});
+    res.json({ success: true, data: applications });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: 'Error' });
+  }
+};

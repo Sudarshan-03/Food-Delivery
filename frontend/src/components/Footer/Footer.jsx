@@ -21,6 +21,7 @@ const Footer = ({ menu, setMenu }) => {
                     <li><Link to="/about">About Us</Link></li>
                     <li><Link to="/contact">Contact Us</Link></li>
                     <li><Link to="/careers">Careers</Link></li>
+                    <li><a href="/admin">Admin Login</a></li>
                     {/* <li><Link to="/blog">Blog</Link></li> */}
                 </ul>
             </div>
