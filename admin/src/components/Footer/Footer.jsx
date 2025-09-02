@@ -18,9 +18,9 @@ const Footer = ({ menu, setMenu }) => {
             <div className="footer-content-center">
                 <h2>Company</h2>
                 <ul>
-                    <li><a herf="https://zestybites.onrender.com/about" > </a>About Us</Link></li>
-                    <li><a herf="https://zestybites.onrender.com/contact" > </a><Link to="/contact">Contact Us</Link></li>
-                    <li><a herf="https://zestybites.onrender.com/careers" > </a><Link to="/careers">Careers</Link></li>
+                    <li><a herf="https://zestybites.onrender.com/about" > </a>About Us</li>
+                    <li><a herf="https://zestybites.onrender.com/contact" > </a>Contact Us</li>
+                    <li><a herf="https://zestybites.onrender.com/careers" > </a>Careers</li>
                    
                     {/* <li><Link to="/blog">Blog</Link></li> */}
                 </ul>
