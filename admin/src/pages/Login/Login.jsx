@@ -3,7 +3,7 @@ import './Login.css';
 import { assets } from '../../assets/assets';
 import axios from 'axios';
 
-const Login = ({ setIsLoggedIn }) => {
+const Login = ({ setIsLoggedIn , url }) => {
     const [data, setData] = useState({
         email: '',
         password: ''
@@ -19,7 +19,7 @@ const Login = ({ setIsLoggedIn }) => {
     const onLogin = async (event) => {
         event.preventDefault();
         try {
-            const response = await axios.post('http://localhost:4000/api/user/login-admin', data);
+            const response = await axios.post(url + '/api/user/login-admin', data);
             if (response.data.success) {
                 localStorage.setItem('token', response.data.token);
                 setIsLoggedIn(true);
