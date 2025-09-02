@@ -9,7 +9,7 @@ const Footer = ({ menu, setMenu }) => {
         <div className="footer-content">
             <div className="footer-content-left">
                 <div className="footer-logo-text">
-                    <Link to='/' onClick={() => setMenu("Home")} className={menu=="Home" ? "active" : ""}>
+                    <Link to='herf="https://zestybites.onrender.com" >' onClick={() => setMenu("Home")} className={menu=="Home" ? "active" : ""}>
                         <img className='logo2' src={assets.logo3} alt="" />
                     </Link>
                     <p>We are passionate about delivering fresh, delicious meals right to your doorstep. Our mission is to make dining easy, enjoyable, and accessible to everyone. With a dedicated team and a commitment to quality, we ensure every order meets the highest standards of taste and service.</p>
@@ -18,10 +18,10 @@ const Footer = ({ menu, setMenu }) => {
             <div className="footer-content-center">
                 <h2>Company</h2>
                 <ul>
-                    <li><Link to="/about">About Us</Link></li>
-                    <li><Link to="/contact">Contact Us</Link></li>
-                    <li><Link to="/careers">Careers</Link></li>
-                    <li><a href="">Admin Login</a></li>
+                    <li><a herf="https://zestybites.onrender.com/about" > </a>About Us</Link></li>
+                    <li><a herf="https://zestybites.onrender.com/contact" > </a><Link to="/contact">Contact Us</Link></li>
+                    <li><a herf="https://zestybites.onrender.com/careers" > </a><Link to="/careers">Careers</Link></li>
+                   
                     {/* <li><Link to="/blog">Blog</Link></li> */}
                 </ul>
             </div>
