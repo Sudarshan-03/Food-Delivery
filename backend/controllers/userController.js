@@ -25,6 +25,30 @@ const loginUser =async(req,res)=>{
     }
 }
 
+// Login admin
+const loginAdmin = async (req, res) => {
+    const { email, password } = req.body;
+    try {
+        const user = await userModel.findOne({ email });
+        if (!user) {
+            return res.json({ success: false, message: "User Does'nt Exist ." })
+        }
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            return res.json({ success: false, message: "Invalid Credentials" });
+
+        }
+        if (user.role !== 'admin') {
+            return res.json({ success: false, message: "Not an Admin" });
+        }
+        const token = createToken(user._id);
+        res.json({ success: true, token });
+    } catch (error) {
+        console.log(error);
+        res.json({ success: false, message: "Error" });
+    }
+}
+
 const createToken=(id)=>{
     return jwt.sign({id},process.env.JWT_SECRET)
 }
@@ -49,12 +73,15 @@ const registerUser = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, salt);
     const verificationToken= Math.floor(100000 + Math.random() * 900000).toString();
 
+    const isFirstUser = (await userModel.countDocuments({})) === 0;
+
     //new user to store
     const newUser = new userModel({
       name:name,
       email:email,
       password:hashedPassword,
-      verificationToken:verificationToken
+      verificationToken:verificationToken,
+      role: isFirstUser ? 'admin' : 'user'
     })
     // Save user to database
     const user = await newUser.save();
@@ -71,4 +98,4 @@ const registerUser = async (req, res) => {
   }
 };
 
-export { loginUser, registerUser };
+export { loginUser, registerUser, loginAdmin };
