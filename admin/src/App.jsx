@@ -14,6 +14,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
     const url = "https://food-delivery-backend-rkui.onrender.com";
+     //const url = "http://localhost:4000";
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const navigate = useNavigate();
 
@@ -33,7 +34,7 @@ const App = () => {
     };
 
     if (!isLoggedIn) {
-        return <Login setIsLoggedIn={setIsLoggedIn} />;
+                return <Login setIsLoggedIn={setIsLoggedIn} url={url} />;
     }
 
     return (
