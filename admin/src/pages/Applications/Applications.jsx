@@ -17,6 +17,7 @@ const Applications = ({ url }) => {
         toast.error("Error");
       }
     } catch (error) {
+      console.error(error);
       toast.error("Error fetching applications");
     }
   }
@@ -33,10 +34,10 @@ const Applications = ({ url }) => {
           <div key={index} className="application-item">
             <img src={assets.parcel_icon} alt="parcel icon" />
             <div>
-              <p className='application-item-name'>{application.name}</p>
-              <p className='application-item-email'>{application.email}</p>
-              <p className='application-item-phone'>{application.phone}</p>
-              <p className='application-item-resume'>{application.resume}</p>
+              <p className='application-item-name'>Name: {application.name}</p>
+              <p className='application-item-email'>Email: {application.email}</p>
+              <p className='application-item-position'>Position: {application.position}</p>
+              <p className='application-item-coverLetter'>Cover Letter: {application.coverLetter}</p>
             </div>
           </div>
         ))}

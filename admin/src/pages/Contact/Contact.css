@@ -1,0 +1,14 @@
+.contact-item {
+    display: grid;
+    grid-template-columns: 0.5fr 2fr 1fr 1fr;
+    align-items: center;
+    gap: 15px;
+    border: 1px solid #cacaca;
+    padding: 20px;
+    margin: 10px 0px;
+    font-size: 14px;
+    color: #505050;
+}
+.contact-item-name{
+    font-weight: 600;
+}

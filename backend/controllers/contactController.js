@@ -11,3 +11,13 @@ export const saveContactForm = async (req, res) => {
     res.status(500).json({ error: 'Failed to save message' });
   }
 };
+
+export const listContactSubmissions = async (req, res) => {
+  try {
+    const contacts = await Contact.find({});
+    res.json({ success: true, data: contacts });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: 'Error' });
+  }
+};
