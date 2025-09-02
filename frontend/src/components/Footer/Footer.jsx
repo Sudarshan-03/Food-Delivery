@@ -21,15 +21,15 @@ const Footer = ({ menu, setMenu }) => {
                     <li><Link to="/about">About Us</Link></li>
                     <li><Link to="/contact">Contact Us</Link></li>
                     <li><Link to="/careers">Careers</Link></li>
-                    <li><a href="/admin">Admin Login</a></li>
+                    <li><a href="https://food-delivery-admin-rust.vercel.app">Admin Login</a></li>
                     {/* <li><Link to="/blog">Blog</Link></li> */}
                 </ul>
             </div>
             <div className="footer-content-right">
                 <h2>Get In Touch</h2>
                 <ul>
-                    <li>+91 9358073903</li>
-                    <li>Email: firstbites@ZestyBites.in </li>
+                    <li><a href="tel:+1234567891">+1 (234) 567-8901</a></li>
+                    <li><a href="mailto:support@zestybites.com">support@Zestybites.com</a></li>
                 </ul>
                  <div className="footer-social-icons-call">
                    

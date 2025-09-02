@@ -101,6 +101,9 @@ const PlaceOrder = () => {
          alert("Error placing order. Please try again.");
         }
   }
+  if (food_list.length === 0) {
+    return <div style={{display:"grid", placeItems:"center", minHeight:"80vh"}}><h1 style={{textAlign:"center"}}>Loading...</h1></div>
+  }
 
   return (
     <form onSubmit={placeOrder} className="place-order">

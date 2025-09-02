@@ -1,13 +1,12 @@
 import React, { createContext, useState, useEffect } from 'react';
 export const StoreContext = createContext(null);
-import { food_list } from '../assets/assets'
 import axios from "axios";
 
 
 const StoreContextProvider = (props) => {
     const [cartItems , setCartItems] = useState({});
     const url = "https://food-delivery-backend-rkui.onrender.com"
-
+    const [food_list, setFoodList] = useState([]);
     const [ token,setToken] = useState(() => localStorage.getItem("token") || "");
     const [user, setUser] = useState(() => {
   try {
@@ -41,7 +40,9 @@ const StoreContextProvider = (props) => {
         for (const item in cartItems) {
             if (cartItems[item] > 0) {
             let itemInfo = food_list.find((product) => product._id === item);
-            totalAmount += itemInfo.price * cartItems [item];
+            if (itemInfo) {
+              totalAmount += itemInfo.price * cartItems[item];
+            }
             }
         }        
             return totalAmount;
