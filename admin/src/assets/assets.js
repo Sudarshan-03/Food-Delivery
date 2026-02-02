@@ -14,7 +14,7 @@ import linkedin from './linkedin.png'
 import email from './email.png'
 import call from './phone-call.png'
 
-export const assets ={
+export const assets = {
     logo,
     logo2,
     logo3,
@@ -25,11 +25,12 @@ export const assets ={
     parcel_icon,
     email,
     call,
-    instagram ,
+    instagram,
     youtube,
     facebook,
     twitter,
     linkedin
 }
 
-export const url = "https://zestybites.onrender.com"
+export const url = import.meta.env.VITE_BACKEND_URL || "http://localhost:4000"
+// export const url = "https://zestybites.onrender.com"

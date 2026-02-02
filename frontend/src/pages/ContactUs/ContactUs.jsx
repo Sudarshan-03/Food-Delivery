@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import './ContactUs.css';
+import { StoreContext } from '../../Context/StoreContext';
 
 const ContactUs = () => {
+  const { url } = useContext(StoreContext);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -10,34 +12,34 @@ const ContactUs = () => {
     message: ''
   });
 
-const handleChange = (e) => {
-  setFormData({
-    ...formData,
-    [e.target.name]: e.target.value
-  });
-};
-
-const handleSubmit = async (e) => {
-  e.preventDefault();
-
-  try {
-    const res = await fetch('https://food-delivery-backend-rkui.onrender.com/api/contact', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData)
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
     });
+  };
 
-    if (res.ok) {
-      alert('Message sent successfully!');
-      setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
-    } else {
-      alert('Failed to send message');
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await fetch(`${url}/api/contact`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+
+      if (res.ok) {
+        alert('Message sent successfully!');
+        setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
+      } else {
+        alert('Failed to send message');
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Error sending message');
     }
-  } catch (err) {
-    console.error(err);
-    alert('Error sending message');
-  }
-};
+  };
   return (
     <section className="contact-section">
       <div className="contact-header">
@@ -50,7 +52,7 @@ const handleSubmit = async (e) => {
             <div className="info-card">
               {/* <div className="info-icon">📍</div> */}
               <h3>Our Location</h3>
-              <p>India Mart C/o Burger Point<br />Sector K, LDA Colony <br/> Lucknow, Uttar Pradesh <br/> 226012, India</p>
+              <p>India Mart C/o Burger Point<br />Sector K, LDA Colony <br /> Lucknow, Uttar Pradesh <br /> 226012, India</p>
             </div>
 
             <div className="info-card">
@@ -147,7 +149,7 @@ const handleSubmit = async (e) => {
           </div>
         </div>
       </div>
-      
+
 
     </section>
   );

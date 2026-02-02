@@ -1,7 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useContext } from 'react';
 import './Careers.css';
+import { StoreContext } from '../../Context/StoreContext';
 
 const Careers = () => {
+  const { url } = useContext(StoreContext);
   useEffect(() => {
     document.title = "Careers - Join QuickBite";
   }, []);
@@ -57,27 +59,32 @@ const Careers = () => {
       coverLetter: e.target.coverLetter.value
     };
     try {
-      const res = await fetch('https://food-delivery-backend-rkui.onrender.com/api/application', {
+      console.log("Submitting to:", `${url}/api/application`);
+      console.log("Data:", applicationData);
+      const res = await fetch(`${url}/api/application`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(applicationData)
       });
+      console.log("Response status:", res.status);
       if (res.ok) {
         alert('Application submitted successfully!');
         e.target.reset();
         setSelectedPosition("");
       } else {
-        alert('Failed to submit application');
+        const errorData = await res.json();
+        console.error("Backend error:", errorData);
+        alert(`Failed to submit application: ${errorData.message || res.statusText}`);
       }
     } catch (err) {
-      console.error(err);
-      alert('Error submitting application');
+      console.error("Network/Fetch error:", err);
+      alert(`Error submitting application: ${err.message}`);
     }
   };
 
   return (
     <div className="careers-page">
-      
+
       {/* Open Positions */}
       <section className="positions" id="positions">
         <div className="positions-container">
@@ -101,25 +108,25 @@ const Careers = () => {
           </div>
         </div>
       </section>
-          <section className="apply-form-section" ref={applyFormRef}>
+      <section className="apply-form-section" ref={applyFormRef}>
         <div className="apply-form-container">
-        <h2>Apply for a Position</h2>
-        <form className="apply-form" onSubmit={handleApplicationSubmit}>
-          <input type="text" name="name" placeholder="Your Name" required />
-          <input type="email" name="email" placeholder="Your Email" required />
-          <input
-            type="text"
-            name="position"
-            placeholder="Position Applying For"
-            value={selectedPosition}
-            onChange={(e) => setSelectedPosition(e.target.value)}
-            required
-          />
-          <textarea name="coverLetter" placeholder="Cover Letter" rows="5" required></textarea>
-          <button type="submit" className="apply-button">Submit Application</button>
-        </form>
-      </div>
-    </section>
+          <h2>Apply for a Position</h2>
+          <form className="apply-form" onSubmit={handleApplicationSubmit}>
+            <input type="text" name="name" placeholder="Your Name" required />
+            <input type="email" name="email" placeholder="Your Email" required />
+            <input
+              type="text"
+              name="position"
+              placeholder="Position Applying For"
+              value={selectedPosition}
+              onChange={(e) => setSelectedPosition(e.target.value)}
+              required
+            />
+            <textarea name="coverLetter" placeholder="Cover Letter" rows="5" required></textarea>
+            <button type="submit" className="apply-button">Submit Application</button>
+          </form>
+        </div>
+      </section>
 
     </div>
   );

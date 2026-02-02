@@ -13,38 +13,40 @@ import MyOrders from './pages/MyOrders/MyOrders';
 import AboutUs from "./pages/AboutUs/AboutUs";
 import ContactUs from "./pages/ContactUs/ContactUs";
 import Careers from "./pages/Careers/Careers";
+import Profile from './pages/Profile/Profile';
 //import Blog from "./pages/Blog/Blog";
-  
+
 import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 
- const App = () => {
+const App = () => {
   const [showLogin, setShowLogin] = useState(() => {
     const user = localStorage.getItem("user");
     return !user; // show login popup if no user is stored
   });
 
-   return (
-    <> 
-    {showLogin?<LoginPopUp setShowLogin={setShowLogin} />:<></>}
-    <div className='app'>
-      <Navbar setShowLogin={setShowLogin}/>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/placeorder" element={<PlaceOrder /*setShowLogin={setShowLogin}*/ />}/>
-        <Route path='/verify' element={<Verify setShowLogin={setShowLogin} />} />
-        <Route path="/about" element={<AboutUs />} />
-        <Route path="/contact" element={<ContactUs />} />
-        <Route path="/careers" element={<Careers />} />
-        {/* <Route path="/blog" element={<Blog />} /> */}
-        <Route path='/myorders' element={<MyOrders setShowLogin={setShowLogin} />} />
-      </Routes>
-     </div>
-     <Footer/>
+  return (
+    <>
+      {showLogin ? <LoginPopUp setShowLogin={setShowLogin} /> : <></>}
+      <div className='app'>
+        <Navbar setShowLogin={setShowLogin} />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/placeorder" element={<PlaceOrder /*setShowLogin={setShowLogin}*/ />} />
+          <Route path='/verify' element={<Verify setShowLogin={setShowLogin} />} />
+          <Route path="/about" element={<AboutUs />} />
+          <Route path="/contact" element={<ContactUs />} />
+          <Route path="/careers" element={<Careers />} />
+          {/* <Route path="/blog" element={<Blog />} /> */}
+          <Route path='/myorders' element={<MyOrders setShowLogin={setShowLogin} />} />
+          <Route path='/profile' element={<Profile />} />
+        </Routes>
+      </div>
+      <Footer />
     </>
-     
-   )
- }
- 
- export default App
+
+  )
+}
+
+export default App
